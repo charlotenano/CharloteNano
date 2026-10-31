@@ -1,4 +1,4 @@
-# Charlote Nano — Creative Portfolio
+# Charlote Nano — Her Pink Space
 
 A responsive, single-page portfolio built with plain HTML, CSS, and JavaScript. No build step or package installation is required.
 
