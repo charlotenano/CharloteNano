@@ -101,7 +101,11 @@ const createBlogEntry = (story) => {
       const placeholder = document.createElement("span");
       placeholder.className = "photo-placeholder";
       placeholder.setAttribute("aria-hidden", "true");
-      placeholder.append(document.createTextNode("✳"));
+      const asterisk = document.createElement("img");
+      asterisk.className = "ui-asterisk";
+      asterisk.src = "assets/asteriskpink.png";
+      asterisk.alt = "";
+      placeholder.append(asterisk);
       const label = document.createElement("small");
       label.textContent = `EVENT PHOTO ${index + 1}`;
       placeholder.append(label);
