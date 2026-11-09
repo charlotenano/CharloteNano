@@ -399,6 +399,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .blog-issue { width: clamp(260px, 38vw, 330px); }
 }
 @media (max-width: 767px) {
+  .blog-carousel-wrap { --mobile-arrow-size: 36px; --mobile-cover-height: 140px; --mobile-track-inset: 16px; }
   html { scroll-padding-top: 75px; }
   .site-header { width: calc(100% - 36px); min-height: 69px; padding: 13px 0; }
   .brand-name { font-size: 13px; }
@@ -480,18 +481,17 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .journey-item h4 { font-size: 12px; }
   .journey-item p { font-size: 9px; }
   .blog-section { padding-bottom: 82px; }
-  .blog-carousel-controls { top: 86px; right: 0; left: 0; justify-content: space-between; transform: none; }
-  .blog-carousel-arrow { width: 36px; height: 36px; }
-  .blog-issues, .blog-carousel { padding-top: 16px; }
+  .blog-carousel-controls { top: calc(var(--mobile-track-inset) + var(--mobile-cover-height) / 2 - var(--mobile-arrow-size) / 2); right: 0; left: 0; justify-content: space-between; transform: none; }
+  .blog-carousel-arrow { width: var(--mobile-arrow-size); height: var(--mobile-arrow-size); }
+  .blog-issues, .blog-carousel { padding-top: var(--mobile-track-inset); }
   .blog-issue, .blog-slide-card { width: min(56vw, 220px); border-radius: 16px; }
   .blog-issue-group, .blog-carousel-group { gap: 12px; padding-right: 12px; }
-  .blog-issue-cover { height: 140px; }
+  .blog-issue-cover, .blog-slide-cover { height: var(--mobile-cover-height); }
   .blog-issue-copy { gap: 7px; padding: 13px 12px 15px; }
   .blog-issue-copy strong, .blog-slide-copy strong { font-size: 13px; }
   .blog-issue-copy > span:nth-child(3), .blog-slide-copy > span { font-size: 9px; line-height: 1.5; }
   .blog-issue-link { font-size: 7px; }
   .blog-library { padding-top: 30px; }
-  .blog-slide-cover { height: 140px; }
   .blog-slide-copy { gap: 6px; padding: 13px 12px 15px; }
   .blog-entry { padding: 20px; }
   .blog-entries { gap: 20px; padding-bottom: 82px; }
