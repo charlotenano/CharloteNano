@@ -135,9 +135,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .poster-flower .ui-lotus { width: 43px; height: 43px; }
 .project-art-illustration { background: linear-gradient(145deg, #f8d3e4, #fff0dc); }
 .catalog-art-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.project-art-pencil-placeholder { flex-direction: column; gap: 12px; border-style: dashed; background: linear-gradient(145deg, #fffdf9, #f5eee5); color: #8d7c70; }
-.project-art-pencil-placeholder > span:first-child { color: #b69b87; font-size: 64px; line-height: 1; }
-.project-art-pencil-placeholder small { font-family: var(--font-display); font-size: 8px; font-weight: 700; letter-spacing: .14em; }
+.project-art-pencil .catalog-art-image { position: static; display: block; width: 100%; height: auto; object-fit: contain; }
 .project-art-brand { justify-content: space-around; background: #ff987f; }
 .brand-stamp { z-index: 1; display: grid; width: 144px; height: 144px; place-content: center; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; background: var(--lime); color: #3a3b22; font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: -.04em; line-height: 1.03; text-align: center; transform: rotate(-11deg); box-shadow: 7px 10px 18px rgba(125, 62, 52, .16); }
 .brand-flower { z-index: 1; }
@@ -154,6 +152,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .project-dialog-layout { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); align-items: center; gap: clamp(22px, 4vw, 42px); }
 .project-dialog-media { min-width: 0; }
 .project-dialog-media .project-art { width: 100%; min-height: 0; aspect-ratio: 4 / 5; }
+.project-dialog-media .project-art-pencil { aspect-ratio: auto; }
 .project-dialog-media .art-label { font-size: clamp(22px, 4vw, 40px); }
 .project-dialog-media .app-window { width: clamp(105px, 16vw, 145px); height: clamp(150px, 22vw, 198px); }
 .project-dialog-media .poster-big { font-size: clamp(48px, 7vw, 78px); }
@@ -203,6 +202,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .catalog-next:hover, .catalog-next:focus-visible { color: var(--charcoal); }
 .catalog-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr)); align-items: start; gap: 24px; }
 .catalog-grid .project-art { min-height: 0; aspect-ratio: 4 / 5; }
+.catalog-grid .project-art-pencil { display: block; aspect-ratio: auto; }
 .catalog-grid .project-meta h2 { margin: 0; font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: -.04em; }
 .catalog-description { margin: 8px 4px 0; color: var(--muted); font-size: 11px; line-height: 1.75; }
 .catalog-note { margin: 30px 0 23px; color: var(--muted); font-size: 11px; line-height: 1.7; text-align: center; }
@@ -418,7 +418,8 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .catalog-top-link { width: 44px; min-height: 44px; font-size: 8px; }
   .project-dialog-layout { grid-template-columns: 1fr; gap: 12px; }
   .project-dialog { padding: 42px 18px 22px; }
-  .project-dialog-media .project-art { width: min(100%, 300px); margin-inline: auto; aspect-ratio: 1 / 1; }
+  .project-dialog-media .project-art:not(.project-art-pencil) { width: min(100%, 300px); margin-inline: auto; aspect-ratio: 1 / 1; }
+  .project-dialog-media .project-art-pencil { width: min(100%, 300px); margin-inline: auto; }
   .project-dialog-copy { padding: 0; }
   .contact-dialog { padding: 42px 20px 22px; }
   .hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); align-items: center; gap: 4px; padding-top: 27px; padding-bottom: 66px; }
@@ -445,12 +446,13 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .section-heading h2 { font-size: clamp(36px, 10vw, 49px); }
   .heading-inline h2 { font-size: clamp(30px, 8.3vw, 42px); }
   .focus-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .focus-card { min-height: 175px; padding: 15px; border-radius: 19px; }
+  .focus-card { min-height: 190px; padding: 15px; border-radius: 19px; }
   .focus-card h3 { font-size: 12px; }
-  .focus-icon { top: 42px; transform: translateX(-50%) scale(.82); }
-  .icon-window { transform: translateX(-50%) rotate(-7deg) scale(.82); }
-  .icon-flower { transform: translateX(-50%) rotate(-12deg) scale(.82); }
-  .icon-code { transform: translateX(-50%) rotate(5deg) scale(.82); }
+  .focus-card h3 { max-width: calc(100% - 34px); }
+  .focus-icon { top: 42px; transform: translateX(-50%) scale(.68); }
+  .icon-window { transform: translateX(-50%) rotate(-7deg) scale(.68); }
+  .icon-flower { transform: translateX(-50%) rotate(-12deg) scale(.68); }
+  .icon-code { transform: translateX(-50%) rotate(5deg) scale(.68); }
   .round-arrow { right: 11px; bottom: 10px; width: 29px; height: 29px; }
   .work-section { padding-bottom: 86px; }
   .work-heading h2 { font-size: clamp(51px, 13vw, 70px); }
@@ -478,7 +480,8 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .journey-item h4 { font-size: 12px; }
   .journey-item p { font-size: 9px; }
   .blog-section { padding-bottom: 82px; }
-  .blog-carousel-controls { right: -12px; left: -12px; }
+  .blog-carousel-controls { top: 0; right: 0; left: auto; gap: 8px; transform: none; }
+  .blog-issues, .blog-carousel { padding-top: 56px; }
   .blog-issue, .blog-slide-card { width: min(56vw, 220px); border-radius: 16px; }
   .blog-issue-group, .blog-carousel-group { gap: 12px; padding-right: 12px; }
   .blog-issue-cover { height: 140px; }
@@ -562,7 +565,10 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .widget-heart-button strong { min-width: 28px; padding: 4px 7px; border-radius: 999px; background: var(--pink-soft); color: var(--pink-dark); font-family: var(--font-display); font-size: 9px; text-align: center; }
 .heart-status { margin-left: 31px; font-size: 8px; }
 @media (max-width: 600px) {
-  .engagement-widget { bottom: 12px; left: 12px; }
+  .engagement-widget { right: auto; bottom: max(12px, env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left)); }
+  .widget-toggle { width: 44px; height: 44px; }
+  .widget-toggle .ui-lotus { width: 24px; height: 24px; }
+  .engagement-panel { right: auto; left: 0; transform-origin: bottom left; }
 }
 @media (prefers-reduced-motion: reduce) {
   .widget-toggle, .widget-heart-icon { transition: none; }

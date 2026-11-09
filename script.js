@@ -408,7 +408,7 @@ if (giveHeartButton && heartCountLabel && heartStatus) {
     if (heartStorageAvailable) {
       try {
         window.localStorage.setItem(heartStorageKey, String(heartCount));
-        heartStatus.textContent = "Hearts from this browser";
+        heartStatus.textContent = "Saved on this browser only; not a site-wide total.";
       } catch (error) {
         console.error("Unable to save the heart count.", error);
         heartStorageAvailable = false;
