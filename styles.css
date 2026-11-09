@@ -480,8 +480,9 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .journey-item h4 { font-size: 12px; }
   .journey-item p { font-size: 9px; }
   .blog-section { padding-bottom: 82px; }
-  .blog-carousel-controls { top: 0; right: 0; left: auto; gap: 8px; transform: none; }
-  .blog-issues, .blog-carousel { padding-top: 56px; }
+  .blog-carousel-controls { top: 4px; right: 0; left: auto; gap: 8px; transform: none; }
+  .blog-carousel-arrow { width: 36px; height: 36px; }
+  .blog-issues, .blog-carousel { padding-top: 48px; }
   .blog-issue, .blog-slide-card { width: min(56vw, 220px); border-radius: 16px; }
   .blog-issue-group, .blog-carousel-group { gap: 12px; padding-right: 12px; }
   .blog-issue-cover { height: 140px; }
@@ -566,7 +567,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .heart-status { margin-left: 31px; font-size: 8px; }
 @media (max-width: 600px) {
   .engagement-widget { right: auto; bottom: max(12px, env(safe-area-inset-bottom)); left: max(12px, env(safe-area-inset-left)); }
-  .widget-toggle { width: 44px; height: 44px; }
+  .widget-toggle { width: 44px; min-width: 44px; height: 44px; flex: 0 0 44px; padding: 0; border-radius: 50%; appearance: none; }
   .widget-toggle .ui-lotus { width: 24px; height: 24px; }
   .engagement-panel { right: auto; left: 0; transform-origin: bottom left; }
 }
