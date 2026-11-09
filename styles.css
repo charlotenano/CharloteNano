@@ -253,7 +253,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .blog-issues { padding: 38px 0 42px; }
 .blog-issues-track, .blog-issue-group { display: flex; width: max-content; }
 .blog-issues-track { animation: blog-issues-marquee 40s linear infinite; }
-.blog-carousel-wrap:hover .blog-issues-track, .blog-carousel-wrap:focus-within .blog-issues-track, .blog-issues:active .blog-issues-track { animation-play-state: paused; }
+.blog-issues:active .blog-issues-track { animation-play-state: paused; }
 .blog-issue-group { gap: 20px; padding-right: 20px; }
 .blog-issue { position: relative; z-index: 0; display: grid; width: clamp(245px, 28vw, 330px); flex: 0 0 auto; overflow: hidden; align-content: start; border-radius: 20px; background: white; box-shadow: var(--shadow-raised); transform: scale(1); transition: transform .3s ease, box-shadow .3s ease, filter .3s ease, opacity .3s ease; }
 .blog-issue-group:has(.blog-issue:hover) .blog-issue:not(:hover), .blog-issue-group:has(.blog-issue:focus-visible) .blog-issue:not(:focus-visible) { opacity: .68; filter: blur(1px); transform: scale(.94); }
@@ -280,7 +280,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .blog-carousel { padding: 38px 0 42px; }
 .blog-carousel-track, .blog-carousel-group { display: flex; width: max-content; }
 .blog-carousel-track { animation: blog-marquee 70s linear infinite; }
-.blog-carousel-wrap:hover .blog-carousel-track, .blog-carousel-wrap:focus-within .blog-carousel-track, .blog-carousel:active .blog-carousel-track { animation-play-state: paused; }
+.blog-carousel:active .blog-carousel-track { animation-play-state: paused; }
 .blog-carousel-group { gap: 18px; padding-right: 18px; }
 .blog-slide-card { position: relative; z-index: 0; display: grid; width: clamp(245px, 25vw, 300px); flex: 0 0 auto; overflow: hidden; align-content: start; border-radius: 20px; background: white; box-shadow: var(--shadow-raised); color: var(--charcoal); transform: scale(1); transition: transform .3s ease, box-shadow .3s ease, filter .3s ease, opacity .3s ease; }
 .blog-carousel-group:has(.blog-slide-card:hover) .blog-slide-card:not(:hover), .blog-carousel-group:has(.blog-slide-card:focus-visible) .blog-slide-card:not(:focus-visible) { opacity: .68; filter: blur(1px); transform: scale(.94); }
@@ -377,8 +377,15 @@ h1, h2, h3, h4, p { margin-top: 0; }
   *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
   .blog-carousel-track, .blog-issues-track { animation: none; }
 }
-@media (hover: none), (pointer: coarse) {
+@media (hover: none), (pointer: coarse), (max-width: 767px) {
   body, a, button, [role="button"], input, select, textarea { cursor: auto; }
+  .blog-issue-group:has(.blog-issue:hover) .blog-issue:not(:hover), .blog-issue-group:has(.blog-issue:focus-visible) .blog-issue:not(:focus-visible),
+  .blog-carousel-group:has(.blog-slide-card:hover) .blog-slide-card:not(:hover), .blog-carousel-group:has(.blog-slide-card:focus-visible) .blog-slide-card:not(:focus-visible) { opacity: 1; filter: none; transform: scale(1); }
+  .blog-issue:hover, .blog-issue:focus-visible, .blog-slide-card:hover, .blog-slide-card:focus-visible { z-index: 0; box-shadow: var(--shadow-raised); transform: scale(1); }
+}
+@media (hover: hover) and (pointer: fine) and (min-width: 768px) {
+  .blog-carousel-wrap:hover .blog-issues-track, .blog-carousel-wrap:focus-within .blog-issues-track,
+  .blog-carousel-wrap:hover .blog-carousel-track, .blog-carousel-wrap:focus-within .blog-carousel-track { animation-play-state: paused; }
 }
 
 @media (max-width: 1023px) {
