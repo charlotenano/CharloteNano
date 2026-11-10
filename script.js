@@ -420,7 +420,7 @@ if (giveHeartButton && heartCountLabel && heartStatus) {
         heartCountLabel.textContent = String(count);
         heartStatus.textContent = "Hearts from visitors!";
       } catch (error) {
-        console.error("Unable to load the shared heart count.", error);
+        console.error("Unable to load overall heart count.", error);
         heartStatus.textContent = "Couldn't load the total hearts. Please try again.";
       }
     };
@@ -443,9 +443,9 @@ if (giveHeartButton && heartCountLabel && heartStatus) {
       try {
         const count = await callHeartCounter("increment_heart_count");
         heartCountLabel.textContent = String(count);
-        heartStatus.textContent = "Your heart was added to the shared total. Thank you!";
+        heartStatus.textContent = "Heart sent!";
       } catch (error) {
-        console.error("Unable to add a heart to the shared total.", error);
+        console.error("Heart not sent :(", error);
         heartStatus.textContent = "Couldn't save your heart. Please try again.";
       } finally {
         heartRequestInProgress = false;
