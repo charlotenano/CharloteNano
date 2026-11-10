@@ -418,16 +418,16 @@ if (giveHeartButton && heartCountLabel && heartStatus) {
       try {
         const count = await callHeartCounter("get_heart_count");
         heartCountLabel.textContent = String(count);
-        heartStatus.textContent = "Shared total; refreshes automatically.";
+        heartStatus.textContent = "Hearts from visitors!";
       } catch (error) {
         console.error("Unable to load the shared heart count.", error);
-        heartStatus.textContent = "Couldn't load the shared heart count. Please try again.";
+        heartStatus.textContent = "Couldn't load the total hearts. Please try again.";
       }
     };
 
     giveHeartButton.disabled = false;
     heartCountLabel.textContent = "…";
-    heartStatus.textContent = "Loading shared heart total…";
+    heartStatus.textContent = "Loading hearts total…";
     void refreshHeartCount();
     window.setInterval(() => {
       if (!document.hidden && !heartRequestInProgress) void refreshHeartCount();
