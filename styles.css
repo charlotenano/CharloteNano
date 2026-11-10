@@ -135,6 +135,8 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .poster-flower .ui-lotus { width: 43px; height: 43px; }
 .project-art-illustration { background: linear-gradient(145deg, #f8d3e4, #fff0dc); }
 .catalog-art-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.project-art-graphic { min-height: 0; aspect-ratio: 4 / 5; background: #fff8f1; }
+.project-art-graphic .catalog-art-image { object-fit: contain; }
 .project-art-pencil .catalog-art-image { position: static; display: block; width: 100%; height: auto; object-fit: contain; }
 .project-art-brand { justify-content: space-around; background: #ff987f; }
 .brand-stamp { z-index: 1; display: grid; width: 144px; height: 144px; place-content: center; border: 2px solid rgba(255,255,255,.9); border-radius: 50%; background: var(--lime); color: #3a3b22; font-family: var(--font-display); font-size: 18px; font-weight: 700; letter-spacing: -.04em; line-height: 1.03; text-align: center; transform: rotate(-11deg); box-shadow: 7px 10px 18px rgba(125, 62, 52, .16); }
@@ -329,7 +331,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .skills-sparkle { position: absolute; right: 15px; bottom: 1px; font-size: 114px; }
 .skills-sparkle .ui-asterisk { opacity: .18; }
 
-.about-section { display: grid; grid-template-columns: .9fr 1.1fr; align-items: center; gap: 84px; padding-bottom: 118px; }
+.about-section { display: grid; grid-template-columns: minmax(220px, .8fr) minmax(0, 1.2fr) minmax(170px, .65fr); align-items: center; gap: clamp(24px, 3vw, 44px); padding-bottom: 118px; }
 .about-art { position: relative; display: grid; min-height: 390px; place-items: center; }
 .about-blob { position: absolute; width: 76%; height: 76%; border-radius: 42% 58% 64% 36% / 42% 41% 59% 58%; background: var(--pink-soft); box-shadow: inset 8px 9px 19px white, 8px 13px 22px rgba(220, 190, 203, .28); transform: rotate(-12deg); }
 .portrait-about { z-index: 1; width: min(78%, 270px); height: 310px; }
@@ -343,6 +345,18 @@ h1, h2, h3, h4, p { margin-top: 0; }
 .about-copy > p:not(.section-kicker):not(.about-signoff) { max-width: 520px; margin-bottom: 16px; color: var(--muted); font-size: 13px; line-height: 1.85; }
 .about-signoff { margin-bottom: 19px; color: var(--charcoal); font-family: var(--font-display); font-size: 12px; font-weight: 600; }
 .about-signoff span { color: var(--pink); font-size: 18px; }
+.about-gallery { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(6, minmax(0, 1fr)); grid-template-areas: "one three" "one three" "one four" "two four" "two five" "two five"; gap: 8px; aspect-ratio: 4 / 5; }
+.about-gallery-card { display: grid; min-height: 0; place-items: center; overflow: hidden; border: 5px solid white; border-radius: 17px; background: linear-gradient(135deg, #f8d3e4, #fff0dc); box-shadow: var(--shadow-raised); color: var(--pink); font-size: 8px; font-weight: 700; letter-spacing: .13em; }
+.about-gallery-card img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.about-gallery-card-one { grid-area: one; }
+.about-gallery-card-two { grid-area: two; }
+.about-gallery-card-three { grid-area: three; }
+.about-gallery-card-four { grid-area: four; }
+.about-gallery-card-five { grid-area: five; }
+.about-gallery-card-two { background: linear-gradient(135deg, #dceaff, #f2e7fb); }
+.about-gallery-card-three { background: linear-gradient(135deg, #e6f4a8, #fff0dc); }
+.about-gallery-card-four { background: linear-gradient(135deg, #ffe2d8, #f8d3e4); }
+.about-gallery-card-five { background: linear-gradient(135deg, #e9e4ff, #dceaff); }
 .text-link { display: inline-flex; align-items: center; gap: 10px; padding-bottom: 5px; border-bottom: 1px solid var(--pink); color: var(--pink); font-family: var(--font-display); font-size: 10px; font-weight: 700; letter-spacing: .1em; }
 
 .contact-section { position: relative; display: flex; min-height: 260px; align-items: center; justify-content: space-between; gap: 25px; overflow: hidden; margin-bottom: 100px; padding: 44px 55px; border-radius: 30px; background: linear-gradient(125deg, #fce8f0, #fff); box-shadow: var(--shadow-raised); }
@@ -402,7 +416,8 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .focus-grid { grid-template-columns: repeat(2, 1fr); }
   .focus-card { min-height: 190px; }
   .skills-band { gap: 23px; padding-inline: 34px; }
-  .about-section { gap: 45px; }
+  .about-section { grid-template-columns: minmax(190px, .8fr) minmax(0, 1.2fr); gap: 35px; }
+  .about-gallery { grid-column: 1 / -1; width: min(100%, 360px); justify-self: center; }
   .blog-issue { width: clamp(260px, 38vw, 330px); }
 }
 @media (max-width: 767px) {
@@ -515,6 +530,7 @@ h1, h2, h3, h4, p { margin-top: 0; }
   .skill-pill img { width: 19px; height: 19px; flex-basis: 19px; }
   .about-section { grid-template-columns: 1fr; gap: 30px; padding-bottom: 85px; }
   .about-art { min-height: 275px; }
+  .about-gallery { grid-column: auto; width: min(100%, 360px); }
   .portrait-about { width: 185px; height: 230px; }
   .about-sticker { right: 12%; bottom: 27px; width: 62px; height: 62px; font-size: 7px; }
   .about-copy h2 { font-size: 64px; }
