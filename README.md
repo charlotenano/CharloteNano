@@ -24,5 +24,5 @@ The hero and About sections use `CharloteNano_Icon.png`, a transparent cutout la
 - Project cards open an in-page detail dialog. Replace their CSS concept previews with your project images and update each card's `data-project-*` attributes.
 - Update the first three shared community stories and photo placeholders in `blogs-data.js`; they appear on both the homepage popups and the full blog page. Add additional posts in `blogs.html`.
 - The contact form opens the visitor's default email app with a prepared message to `charlotenano29@gmail.com`; direct website-to-email delivery requires a configured email service or backend.
-- The floating flower opens the “Give Cha a heart” button. Heart counts are saved in each visitor's browser; a shared visitor total requires a backend.
+- The floating flower opens the shared “Give Cha a heart” counter. To connect it, run [`supabase-heart-counter.sql`](./supabase-heart-counter.sql) in the Supabase SQL Editor, then replace the two Supabase placeholders in `script.js` with your project URL and public anon/publishable key. Never use the service-role key in browser code.
 - Adjust the typography, palette, and responsive layouts in `styles.css`.

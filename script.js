@@ -377,49 +377,82 @@ const heartCountLabel = document.querySelector("#heart-count");
 const heartStatus = document.querySelector("#heart-status");
 
 if (giveHeartButton && heartCountLabel && heartStatus) {
-  const heartStorageKey = "charlote-nano-hearts-given";
-  let heartCount = 0;
-  let heartStorageAvailable = true;
+  const supabaseUrl = "https://dzvpussncanqbcyyxgmh.supabase.co";
+  const supabaseAnonKey = "sb_publishable_Gdliob9KV40ggYRGXjC1sA_ljMxvOZ0";
+  const isSupabaseConfigured = !supabaseUrl.startsWith("YOUR_")
+    && !supabaseAnonKey.startsWith("YOUR_");
+  let heartRequestInProgress = false;
 
-  try {
-    const storedCount = window.localStorage.getItem(heartStorageKey);
-    if (storedCount !== null) {
-      const parsedCount = Number(storedCount);
-      if (Number.isSafeInteger(parsedCount) && parsedCount >= 0) {
-        heartCount = parsedCount;
-      } else {
-        console.error("The saved heart count is invalid.");
-        heartStatus.textContent = "Saved heart count unavailable; new hearts will start at zero.";
+  const callHeartCounter = async (functionName) => {
+    const response = await fetch(
+      `${supabaseUrl.replace(/\/+$/, "")}/rest/v1/rpc/${functionName}`,
+      {
+        method: "POST",
+        headers: {
+          apikey: supabaseAnonKey,
+          Authorization: `Bearer ${supabaseAnonKey}`,
+          "Content-Type": "application/json"
+        },
+        body: "{}"
       }
-    }
-  } catch (error) {
-    console.error("Unable to read the saved heart count.", error);
-    heartStorageAvailable = false;
-    heartStatus.textContent = "This browser blocks storage; hearts count for this visit only.";
-  }
+    );
 
-  heartCountLabel.textContent = String(heartCount);
-
-  giveHeartButton.addEventListener("click", () => {
-    if (heartCount >= Number.MAX_SAFE_INTEGER) {
-      heartStatus.textContent = "This browser's heart count has reached its limit.";
-      return;
+    if (!response.ok) {
+      const errorMessage = await response.text();
+      throw new Error(`Supabase ${functionName} failed (${response.status}): ${errorMessage}`);
     }
 
-    heartCount += 1;
-    heartCountLabel.textContent = String(heartCount);
+    const count = Number(await response.json());
+    if (!Number.isSafeInteger(count) || count < 0) {
+      throw new Error(`Supabase ${functionName} returned an invalid heart count.`);
+    }
+    return count;
+  };
 
-    if (heartStorageAvailable) {
+  if (!isSupabaseConfigured) {
+    heartCountLabel.textContent = "—";
+    giveHeartButton.disabled = true;
+    heartStatus.textContent = "Add your Supabase project URL and public anon key in script.js.";
+  } else {
+    const refreshHeartCount = async () => {
       try {
-        window.localStorage.setItem(heartStorageKey, String(heartCount));
-        heartStatus.textContent = "Saved on this browser only; not a site-wide total.";
+        const count = await callHeartCounter("get_heart_count");
+        heartCountLabel.textContent = String(count);
+        heartStatus.textContent = "Shared total; refreshes automatically.";
       } catch (error) {
-        console.error("Unable to save the heart count.", error);
-        heartStorageAvailable = false;
-        heartStatus.textContent = "This browser blocks storage; hearts count for this visit only.";
+        console.error("Unable to load the shared heart count.", error);
+        heartStatus.textContent = "Couldn't load the shared heart count. Please try again.";
       }
-    }
-  });
+    };
+
+    giveHeartButton.disabled = false;
+    heartCountLabel.textContent = "…";
+    heartStatus.textContent = "Loading shared heart total…";
+    void refreshHeartCount();
+    window.setInterval(() => {
+      if (!document.hidden && !heartRequestInProgress) void refreshHeartCount();
+    }, 30000);
+
+    giveHeartButton.addEventListener("click", async () => {
+      if (heartRequestInProgress) return;
+
+      heartRequestInProgress = true;
+      giveHeartButton.disabled = true;
+      heartStatus.textContent = "Sending your heart…";
+
+      try {
+        const count = await callHeartCounter("increment_heart_count");
+        heartCountLabel.textContent = String(count);
+        heartStatus.textContent = "Your heart was added to the shared total. Thank you!";
+      } catch (error) {
+        console.error("Unable to add a heart to the shared total.", error);
+        heartStatus.textContent = "Couldn't save your heart. Please try again.";
+      } finally {
+        heartRequestInProgress = false;
+        giveHeartButton.disabled = false;
+      }
+    });
+  }
 }
 
 const year = document.querySelector("#current-year");
