@@ -18,6 +18,10 @@ if (menuToggle && navigation) {
   });
 }
 
+document.querySelectorAll("[data-link-placeholder]").forEach((link) => {
+  link.addEventListener("click", (event) => event.preventDefault());
+});
+
 const applyProjectFilter = (selectedCategory) => {
   let visibleProjects = 0;
   document.querySelectorAll(".project-card").forEach((card) => {
